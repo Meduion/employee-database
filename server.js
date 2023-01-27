@@ -1,10 +1,10 @@
-// Import express, inquirer, mysql, and cTable functionality
+// Import express, inquirer, cTable, dotenv and database functionality
 const express = require('express');
-const inquirer = require('inquirer');
-const mysql = require('mysql2');
-const cTable = require('console.table');
-require('dotenv').config()
-//console.log(process.env) // remove this after you've confirmed it is working
+// const inquirer = require('inquirer');
+// const cTable = require('console.table');
+require('dotenv').config();
+const db = require('./config/connection');
+const EmployeeDatabase = require('./lib/EmployeeDatabase');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -14,14 +14,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Connect to database
+db.connect(function(err) {
+  if (err) {
+    console.log('Database Connection Failed', err);
+  } else {
+    console.log('Database Connected');
+  }
+});
 
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
-        // Use dotenv functionality to hide user credentials
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME
-    },
-    console.log(`Connected to the employees_db database.`)
-  );
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+const directory = new EmployeeDatabase;
+
+directory.start();
