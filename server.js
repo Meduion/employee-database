@@ -5,6 +5,7 @@ const express = require('express');
 require('dotenv').config();
 const db = require('./config/connection');
 const EmployeeDatabase = require('./lib/EmployeeDatabase');
+const directory = new EmployeeDatabase;
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -17,15 +18,12 @@ app.use(express.json());
 db.connect(function(err) {
   if (err) {
     console.log('Database Connection Failed', err);
-  } else {
-    console.log('Database Connected');
-  }
+  }  // else {
+    // console.log('Database Connected');
+  // }
 });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  directory.start();
 });
-
-const directory = new EmployeeDatabase;
-
-directory.start();
