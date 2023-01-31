@@ -19,7 +19,7 @@
   
   For a video of the application in action please click [HERE](https://drive.google.com/file/d/1qSJlC_yisCo4V-Tl1aczlcxJbZcr2jpm/view?usp=share_link)
 
-![Employee Database Demonstration](./images/employeedatabase.jpg)
+![Employee Database Demonstration](./images/employeedatabase.png)
 
   ## Installation
   
