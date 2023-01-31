@@ -1,10 +1,9 @@
-// Import express, inquirer, cTable, dotenv and database functionality
+// Import express, dotenv and database functionality
 const express = require('express');
-// const inquirer = require('inquirer');
-// const cTable = require('console.table');
 require('dotenv').config();
 const db = require('./config/connection');
 const EmployeeDatabase = require('./lib/EmployeeDatabase');
+// create variable from EmployeeDatabase class
 const directory = new EmployeeDatabase;
 
 const PORT = process.env.PORT || 3001;
@@ -25,5 +24,6 @@ db.connect(function(err) {
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  // once server is running call the start method of directory to begin program
   directory.start();
 });
